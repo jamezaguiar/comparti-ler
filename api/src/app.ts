@@ -1,7 +1,11 @@
+import 'reflect-metadata';
+
 import express from 'express';
 import http from 'http';
 import socketio from 'socket.io';
+
 import routes from './routes';
+import './database';
 
 const app = express();
 app.use(express.json());
