@@ -17,10 +17,10 @@ class Loan {
   id: string;
 
   @Column()
-  book_isbn: string;
+  book_id: string;
 
   @ManyToOne(() => Book)
-  @JoinColumn({ name: 'book_isbn' })
+  @JoinColumn({ name: 'book_id' })
   book: Book;
 
   @Column()
