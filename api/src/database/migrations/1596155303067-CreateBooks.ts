@@ -12,10 +12,16 @@ export default class CreateBooks1596155303067 implements MigrationInterface {
         name: 'books',
         columns: [
           {
+            name: 'id',
+            type: 'uuid',
+            isPrimary: true,
+            generationStrategy: 'uuid',
+            default: 'uuid_generate_v4()',
+          },
+          {
             name: 'isbn',
             type: 'varchar',
-            isPrimary: true,
-            isUnique: true,
+            isNullable: false,
           },
           {
             name: 'owner_id',
