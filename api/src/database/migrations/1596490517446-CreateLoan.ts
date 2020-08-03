@@ -19,8 +19,8 @@ export default class CreateLoan1596490517446 implements MigrationInterface {
             default: 'uuid_generate_v4()',
           },
           {
-            name: 'book_isbn',
-            type: 'varchar',
+            name: 'book_id',
+            type: 'uuid',
             isNullable: false,
           },
           {
@@ -61,8 +61,8 @@ export default class CreateLoan1596490517446 implements MigrationInterface {
       'loans',
       new TableForeignKey({
         name: 'Book',
-        columnNames: ['book_isbn'],
-        referencedColumnNames: ['isbn'],
+        columnNames: ['book_id'],
+        referencedColumnNames: ['id'],
         referencedTableName: 'books',
         onDelete: 'SET NULL',
         onUpdate: 'CASCADE',
