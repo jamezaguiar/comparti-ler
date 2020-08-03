@@ -1,18 +1,21 @@
 import {
   Entity,
   CreateDateColumn,
-  PrimaryColumn,
   UpdateDateColumn,
   ManyToOne,
   Column,
   JoinColumn,
+  PrimaryGeneratedColumn,
 } from 'typeorm';
 
 import User from './User';
 
 @Entity('books')
 class Book {
-  @PrimaryColumn()
+  @PrimaryGeneratedColumn('uuid')
+  id: string;
+
+  @Column()
   isbn: string;
 
   @Column()
