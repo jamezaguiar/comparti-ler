@@ -15,6 +15,7 @@ export default class CreateBooks1596155303067 implements MigrationInterface {
             name: 'isbn',
             type: 'varchar',
             isPrimary: true,
+            isUnique: true,
           },
           {
             name: 'owner_id',
@@ -22,9 +23,14 @@ export default class CreateBooks1596155303067 implements MigrationInterface {
             isNullable: false,
           },
           {
-            name: 'loan_id',
-            type: 'uuid',
-            isNullable: true,
+            name: 'created_at',
+            type: 'timestamp',
+            default: 'now()',
+          },
+          {
+            name: 'updated_at',
+            type: 'timestamp',
+            default: 'now()',
           },
         ],
       }),
