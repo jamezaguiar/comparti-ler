@@ -43,6 +43,11 @@ export default class CreateBooks1596155303067 implements MigrationInterface {
             isNullable: false,
           },
           {
+            name: 'borrowed',
+            type: 'boolean',
+            default: 'false',
+          },
+          {
             name: 'created_at',
             type: 'timestamp',
             default: 'now()',
