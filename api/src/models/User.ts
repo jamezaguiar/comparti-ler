@@ -4,7 +4,9 @@ import {
   PrimaryGeneratedColumn,
   CreateDateColumn,
   UpdateDateColumn,
+  OneToMany,
 } from 'typeorm';
+import Book from './Book';
 
 @Entity('users')
 class User {
@@ -22,6 +24,9 @@ class User {
 
   @Column()
   whatsapp: string;
+
+  @OneToMany(() => Book, book => book.owner)
+  books: Book[];
 
   @CreateDateColumn()
   created_at: Date;
