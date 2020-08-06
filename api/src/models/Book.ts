@@ -28,6 +28,9 @@ class Book {
   cover_url: string;
 
   @Column()
+  borrowed: boolean;
+
+  @Column()
   owner_id: string;
 
   @ManyToOne(() => User, user => user.books)
