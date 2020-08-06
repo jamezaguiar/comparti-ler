@@ -14,7 +14,7 @@ class RegisterBookService {
   public async execute({ isbn, owner_id }: RequestDTO): Promise<Book> {
     const booksRepository = getCustomRepository(BooksRepository);
 
-    const { success } = await booksRepository.checkIfBookExists({ isbn });
+    const { success } = await booksRepository.checkIfBookExists(isbn);
 
     if (!success) {
       throw new AppError('ISBN not found.');
