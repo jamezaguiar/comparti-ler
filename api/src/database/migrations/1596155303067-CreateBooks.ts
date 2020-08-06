@@ -24,6 +24,20 @@ export default class CreateBooks1596155303067 implements MigrationInterface {
             isNullable: false,
           },
           {
+            name: 'title',
+            type: 'varchar',
+            isNullable: false,
+          },
+          {
+            name: 'author',
+            type: 'varchar',
+            isNullable: false,
+          },
+          {
+            name: 'cover_url',
+            type: 'varchar',
+          },
+          {
             name: 'owner_id',
             type: 'uuid',
             isNullable: false,

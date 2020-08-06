@@ -19,6 +19,15 @@ class Book {
   isbn: string;
 
   @Column()
+  title: string;
+
+  @Column()
+  author: string;
+
+  @Column()
+  cover_url: string;
+
+  @Column()
   owner_id: string;
 
   @ManyToOne(() => User, user => user.books)
