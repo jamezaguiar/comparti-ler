@@ -25,6 +25,9 @@ class Book {
   author: string;
 
   @Column()
+  synopsis: string;
+
+  @Column()
   cover_url: string;
 
   @Column()

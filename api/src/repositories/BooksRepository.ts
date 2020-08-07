@@ -20,6 +20,7 @@ interface BookDataDTO {
       codigo_contribuicao: string;
     },
   ];
+  sinopse: string;
   imagens: {
     imagem_primeira_capa: {
       pequena: string;
@@ -49,20 +50,12 @@ class BooksRepository extends Repository<Book> {
 
     const { titulo } = response.data.books[0];
     const { contribuicao } = response.data.books[0];
+    const { sinopse } = response.data.books[0];
     const { imagens } = response.data.books[0];
 
-    const bookData: BookDataDTO = { titulo, contribuicao, imagens };
+    const bookData: BookDataDTO = { titulo, contribuicao, sinopse, imagens };
 
     return bookData;
-  }
-
-  public async verifyIfUserHasTheBook(
-    isbn: string,
-    owner_id: string,
-  ): Promise<Book | null> {
-    const book = await this.findOne({ where: { owner_id, isbn } });
-
-    return book || null;
   }
 }
 

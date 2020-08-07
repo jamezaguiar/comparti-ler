@@ -20,9 +20,12 @@ class RegisterBookService {
       throw new AppError('ISBN not found.');
     }
 
-    const { titulo, contribuicao, imagens } = await booksRepository.getBookData(
-      isbn,
-    );
+    const {
+      titulo,
+      contribuicao,
+      sinopse,
+      imagens,
+    } = await booksRepository.getBookData(isbn);
 
     const author = `${contribuicao[0].nome} ${contribuicao[0].sobrenome}`;
 
@@ -31,6 +34,7 @@ class RegisterBookService {
       owner_id,
       title: titulo,
       author,
+      synopsis: sinopse,
       cover_url: imagens.imagem_primeira_capa.grande,
     });
 
