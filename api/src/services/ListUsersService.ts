@@ -9,7 +9,7 @@ class ListUsersService {
 
     const users = await usersRepository.find({
       select: ['id', 'name', 'email', 'whatsapp', 'created_at', 'updated_at'],
-      relations: ['books'],
+      relations: ['books', 'wishes'],
     });
 
     return users;
