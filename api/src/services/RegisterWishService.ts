@@ -2,6 +2,7 @@ import { getCustomRepository } from 'typeorm';
 
 import WishesRepository from '../repositories/WishesRepository';
 import Wish from '../models/Wish';
+import BooksRepository from '../repositories/BooksRepository';
 
 interface BookData {
   isbn: string;
@@ -26,6 +27,7 @@ class RegisterWishService {
     isbn,
     requester_id,
   }: RequestDTO): Promise<ResponseDTO> {
+    const booksRepository = getCustomRepository(BooksRepository);
     const wishesRepository = getCustomRepository(WishesRepository);
 
     const wish = wishesRepository.create({
@@ -35,7 +37,7 @@ class RegisterWishService {
 
     await wishesRepository.save(wish);
 
-    const bookData = await wishesRepository.findBookData(isbn);
+    const bookData = await booksRepository.getBookData(isbn);
 
     const author = `${bookData.contribuicao[0].nome} ${bookData.contribuicao[0].sobrenome}`;
 

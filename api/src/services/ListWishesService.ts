@@ -4,6 +4,7 @@ import { getCustomRepository } from 'typeorm';
 import Wish from '../models/Wish';
 
 import WishesRepository from '../repositories/WishesRepository';
+import BooksRepository from '../repositories/BooksRepository';
 
 interface BookData {
   isbn: string;
@@ -13,23 +14,24 @@ interface BookData {
   cover_url: string;
 }
 
-interface WishData {
+interface ResponseDTO {
   wish: Wish;
-  bookData: BookData;
+  book: BookData;
 }
 
 class ListWishesService {
-  public async execute(): Promise<WishData[]> {
+  public async execute(): Promise<ResponseDTO[]> {
+    const booksRepository = getCustomRepository(BooksRepository);
     const wishesRepository = getCustomRepository(WishesRepository);
 
     const wishes = await wishesRepository.find({
       relations: ['requester'],
     });
 
-    const formattedWishes: WishData[] = [];
+    const formattedWishes: ResponseDTO[] = [];
 
     for await (const wish of wishes) {
-      const bookData = await wishesRepository.findBookData(wish.book_isbn);
+      const bookData = await booksRepository.getBookData(wish.book_isbn);
 
       const author = `${bookData.contribuicao[0].nome} ${bookData.contribuicao[0].sobrenome}`;
 
@@ -41,7 +43,7 @@ class ListWishesService {
         cover_url: bookData.imagens.imagem_primeira_capa.grande,
       };
 
-      formattedWishes.push({ wish, bookData: book });
+      formattedWishes.push({ wish, book });
     }
 
     return formattedWishes;
