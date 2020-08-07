@@ -30,6 +30,15 @@ class RegisterWishService {
     const booksRepository = getCustomRepository(BooksRepository);
     const wishesRepository = getCustomRepository(WishesRepository);
 
+    const userAlreadyRegisteredTheWish = await wishesRepository.checkIfUserHasAlreadyRegisteredTheWish(
+      isbn,
+      requester_id,
+    );
+
+    if (userAlreadyRegisteredTheWish) {
+      return userAlreadyRegisteredTheWish;
+    }
+
     const wish = wishesRepository.create({
       requester_id,
       book_isbn: isbn,
