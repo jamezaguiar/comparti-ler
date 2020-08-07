@@ -7,6 +7,7 @@ import {
   OneToMany,
 } from 'typeorm';
 import Book from './Book';
+import Wish from './Wish';
 
 @Entity('users')
 class User {
@@ -27,6 +28,9 @@ class User {
 
   @OneToMany(() => Book, book => book.owner)
   books: Book[];
+
+  @OneToMany(() => Wish, wish => wish.requester)
+  wishes: Wish[];
 
   @CreateDateColumn()
   created_at: Date;
