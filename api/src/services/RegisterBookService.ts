@@ -20,6 +20,15 @@ class RegisterBookService {
       throw new AppError('ISBN not found.');
     }
 
+    const userAlreadyHasTheBook = await booksRepository.checkIfUserAlreadyHasTheBook(
+      isbn,
+      owner_id,
+    );
+
+    if (userAlreadyHasTheBook) {
+      return userAlreadyHasTheBook;
+    }
+
     const {
       titulo,
       contribuicao,

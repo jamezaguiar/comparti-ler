@@ -45,6 +45,19 @@ class BooksRepository extends Repository<Book> {
     return status;
   }
 
+  public async checkIfUserAlreadyHasTheBook(
+    isbn: string,
+    user_id: string,
+  ): Promise<Book | null> {
+    const book = await this.findOne({ where: { isbn, owner_id: user_id } });
+
+    if (book) {
+      return book;
+    }
+
+    return null;
+  }
+
   public async getBookData(isbn: string): Promise<BookDataDTO> {
     const response = await booksAPI.get<APIResponseDTO>(`?isbn=${isbn}`);
 
