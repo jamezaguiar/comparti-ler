@@ -2,6 +2,9 @@ import { Router } from 'express';
 
 import CreateUserService from '../services/CreateUserService';
 import ListUsersService from '../services/ListUsersService';
+import ListUserByIdService from '../services/ListUserByIdService';
+
+import ensureAuthenticated from '../middlewares/ensureAuthenticated';
 
 const usersRouter = Router();
 
@@ -16,7 +19,19 @@ usersRouter.post('/', async (request, response) => {
   return response.json(user);
 });
 
-usersRouter.get('/list', async (request, response) => {
+usersRouter.use(ensureAuthenticated);
+
+usersRouter.get('/list/:id', async (request, response) => {
+  const { id } = request.params;
+
+  const listUserById = new ListUserByIdService();
+
+  const user = await listUserById.execute(id);
+
+  return response.json(user);
+});
+
+usersRouter.get('/listAll', async (request, response) => {
   const listUsers = new ListUsersService();
 
   const users = await listUsers.execute();
