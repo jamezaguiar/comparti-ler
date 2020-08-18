@@ -4,6 +4,7 @@ import ensureAuthenticated from '../middlewares/ensureAuthenticated';
 
 import RegisterBookService from '../services/RegisterBookService';
 import ListBooksService from '../services/ListBooksService';
+import ListUserBooksService from '../services/ListUserBooksService';
 
 const booksRouter = Router();
 
@@ -22,7 +23,17 @@ booksRouter.post('/register', async (request, response) => {
   return response.json(book);
 });
 
-booksRouter.get('/list', async (request, response) => {
+booksRouter.get('/list/:owner_id', async (request, response) => {
+  const { owner_id } = request.params;
+
+  const listUserBooks = new ListUserBooksService();
+
+  const books = await listUserBooks.execute(owner_id);
+
+  return response.json(books);
+});
+
+booksRouter.get('/listAll', async (request, response) => {
   const listBooks = new ListBooksService();
 
   const books = await listBooks.execute();
