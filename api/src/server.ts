@@ -6,5 +6,6 @@ const PORT = process.env.PORT || 3333;
 server.listen(PORT, () => console.log(`Server running on port ${PORT}`));
 
 io.on('connection', (socket: Socket) => {
-  console.log(`Cliente ${socket.id} conectado.`);
+  const { name, id } = socket.handshake.query;
+  console.log(`Usuário ${name} de ID ${id} conectado.`);
 });
