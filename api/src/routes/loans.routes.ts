@@ -12,9 +12,9 @@ loansRouter.get('/possibleLoans/:user_id', async (request, response) => {
 
   const checkPossibleLoansService = new CheckPossibleLoansService();
 
-  const test = await checkPossibleLoansService.execute(user_id);
+  const possibleLoans = await checkPossibleLoansService.execute(user_id);
 
-  return response.json(test);
+  return response.json(possibleLoans);
 });
 
 export default loansRouter;
