@@ -4,6 +4,8 @@ import WishesRepository from '../repositories/WishesRepository';
 import Wish from '../models/Wish';
 import BooksRepository from '../repositories/BooksRepository';
 
+import SendPossibleLoansService from './SendPossibleLoansService';
+
 interface BookData {
   isbn: string;
   title: string;
@@ -46,16 +48,23 @@ class RegisterWishService {
 
     await wishesRepository.save(wish);
 
+    const sendPossibleLoans = new SendPossibleLoansService();
+
+    sendPossibleLoans.execute({});
+
     const bookData = await booksRepository.getBookData(isbn);
 
     const author = `${bookData.contribuicao[0].nome} ${bookData.contribuicao[0].sobrenome}`;
+    const cover_url = bookData.imagens.imagem_primeira_capa
+      ? bookData.imagens.imagem_primeira_capa.grande
+      : 'https://i0.wp.com/www.guiada3aidade.com.br/wp-content/uploads/2018/10/sem-capa.jpg';
 
     const book = {
       isbn,
       title: bookData.titulo,
       author,
       synopsis: bookData.sinopse,
-      cover_url: bookData.imagens.imagem_primeira_capa.grande,
+      cover_url,
     };
 
     return { wish, book };

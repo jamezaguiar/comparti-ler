@@ -4,6 +4,7 @@ import Book from '../models/Book';
 import BooksRepository from '../repositories/BooksRepository';
 
 import AppError from '../error/AppError';
+import SendPossibleLoansService from './SendPossibleLoansService';
 
 interface RequestDTO {
   isbn: string;
@@ -37,6 +38,9 @@ class RegisterBookService {
     } = await booksRepository.getBookData(isbn);
 
     const author = `${contribuicao[0].nome} ${contribuicao[0].sobrenome}`;
+    const cover_url = imagens.imagem_primeira_capa
+      ? imagens.imagem_primeira_capa.grande
+      : 'https://i0.wp.com/www.guiada3aidade.com.br/wp-content/uploads/2018/10/sem-capa.jpg';
 
     const book = booksRepository.create({
       isbn,
@@ -44,10 +48,14 @@ class RegisterBookService {
       title: titulo,
       author,
       synopsis: sinopse,
-      cover_url: imagens.imagem_primeira_capa.grande,
+      cover_url,
     });
 
     await booksRepository.save(book);
+
+    const sendPossibleLoans = new SendPossibleLoansService();
+
+    sendPossibleLoans.execute({});
 
     return book;
   }
