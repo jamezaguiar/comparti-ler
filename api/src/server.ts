@@ -1,8 +1,7 @@
-/* eslint-disable guard-for-in */
-/* eslint-disable no-restricted-syntax */
 import { Socket } from 'socket.io';
 import { server, io } from './app';
-import CheckPossibleLoansService from './services/CheckPossibleLoansService';
+
+import SendPossibleLoansService from './services/SendPossibleLoansService';
 
 const PORT = process.env.PORT || 3333;
 
@@ -12,7 +11,7 @@ interface ConnectedUsers {
   [socket_id: string]: string;
 }
 
-const connectedUsers: ConnectedUsers = {};
+export const connectedUsers: ConnectedUsers = {};
 
 io.on('connection', async (socket: Socket) => {
   const { name, id } = socket.handshake.query;
@@ -20,14 +19,9 @@ io.on('connection', async (socket: Socket) => {
 
   connectedUsers[socket.id] = id;
 
-  const checkPossibleLoansService = new CheckPossibleLoansService();
+  const sendPossibleLoans = new SendPossibleLoansService();
 
-  const possibleLoans = await checkPossibleLoansService.execute(id);
-
-  for (const user in connectedUsers) {
-    io.to(user).emit('check_possible_loans', possibleLoans);
-    console.log(user);
-  }
+  sendPossibleLoans.execute({ socket_id: socket.id, user_id: id });
 
   socket.on('disconnect', () => {
     console.log(`Usuário ${name} de ID ${id} desconectado.`);
