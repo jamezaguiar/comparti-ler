@@ -8,7 +8,7 @@ const wishesRouter = Router();
 
 wishesRouter.use(ensureAuthenticated);
 
-wishesRouter.post('/', async (request, response) => {
+wishesRouter.post('/register', async (request, response) => {
   const { isbn } = request.body;
 
   const registerWish = new RegisterWishService();
