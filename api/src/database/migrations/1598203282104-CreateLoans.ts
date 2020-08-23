@@ -5,7 +5,7 @@ import {
   TableForeignKey,
 } from 'typeorm';
 
-export default class CreateLoan1596490517446 implements MigrationInterface {
+export default class CreateLoans1598203282104 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
@@ -19,7 +19,7 @@ export default class CreateLoan1596490517446 implements MigrationInterface {
             default: 'uuid_generate_v4()',
           },
           {
-            name: 'book_id',
+            name: 'requester_id',
             type: 'uuid',
             isNullable: false,
           },
@@ -29,19 +29,28 @@ export default class CreateLoan1596490517446 implements MigrationInterface {
             isNullable: false,
           },
           {
-            name: 'book_receiver_id',
+            name: 'book_id',
             type: 'uuid',
             isNullable: false,
           },
           {
+            name: 'book_isbn',
+            type: 'varchar',
+            isNullable: false,
+          },
+          {
+            name: 'status',
+            type: 'varchar',
+          },
+          {
             name: 'received_at',
             type: 'timestamp',
-            isNullable: false,
+            isNullable: true,
           },
           {
             name: 'returned_at',
             type: 'timestamp',
-            isNullable: false,
+            isNullable: true,
           },
           {
             name: 'created_at',
@@ -60,10 +69,10 @@ export default class CreateLoan1596490517446 implements MigrationInterface {
     await queryRunner.createForeignKey(
       'loans',
       new TableForeignKey({
-        name: 'Book',
-        columnNames: ['book_id'],
+        name: 'Requester',
+        columnNames: ['requester_id'],
         referencedColumnNames: ['id'],
-        referencedTableName: 'books',
+        referencedTableName: 'users',
         onDelete: 'SET NULL',
         onUpdate: 'CASCADE',
       }),
@@ -72,7 +81,7 @@ export default class CreateLoan1596490517446 implements MigrationInterface {
     await queryRunner.createForeignKey(
       'loans',
       new TableForeignKey({
-        name: 'BookOwner',
+        name: 'Book_Owner',
         columnNames: ['book_owner_id'],
         referencedColumnNames: ['id'],
         referencedTableName: 'users',
@@ -84,10 +93,10 @@ export default class CreateLoan1596490517446 implements MigrationInterface {
     await queryRunner.createForeignKey(
       'loans',
       new TableForeignKey({
-        name: 'BookReceiver',
-        columnNames: ['book_receiver_id'],
+        name: 'Book',
+        columnNames: ['book_id'],
         referencedColumnNames: ['id'],
-        referencedTableName: 'users',
+        referencedTableName: 'books',
         onDelete: 'SET NULL',
         onUpdate: 'CASCADE',
       }),
@@ -95,9 +104,9 @@ export default class CreateLoan1596490517446 implements MigrationInterface {
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropForeignKey('loans', 'BookReceiver');
-    await queryRunner.dropForeignKey('loans', 'BookOwner');
     await queryRunner.dropForeignKey('loans', 'Book');
+    await queryRunner.dropForeignKey('loans', 'Book_Owner');
+    await queryRunner.dropForeignKey('loans', 'Requester');
     await queryRunner.dropTable('loans');
   }
 }
