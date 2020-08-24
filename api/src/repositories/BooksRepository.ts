@@ -45,6 +45,21 @@ class BooksRepository extends Repository<Book> {
     return status;
   }
 
+  public async checkIfBookIsBorrowed(
+    owner_id: string,
+    isbn: string,
+  ): Promise<boolean> {
+    const book = await this.findOne({
+      where: {
+        owner_id,
+        isbn,
+        borrowed: true,
+      },
+    });
+
+    return !!book;
+  }
+
   public async checkIfUserAlreadyHasTheBook(
     isbn: string,
     user_id: string,
