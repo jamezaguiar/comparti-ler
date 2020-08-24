@@ -29,11 +29,6 @@ export default class CreateLoans1598203282104 implements MigrationInterface {
             isNullable: false,
           },
           {
-            name: 'book_id',
-            type: 'uuid',
-            isNullable: false,
-          },
-          {
             name: 'book_isbn',
             type: 'varchar',
             isNullable: false,
@@ -85,18 +80,6 @@ export default class CreateLoans1598203282104 implements MigrationInterface {
         columnNames: ['book_owner_id'],
         referencedColumnNames: ['id'],
         referencedTableName: 'users',
-        onDelete: 'SET NULL',
-        onUpdate: 'CASCADE',
-      }),
-    );
-
-    await queryRunner.createForeignKey(
-      'loans',
-      new TableForeignKey({
-        name: 'Book',
-        columnNames: ['book_id'],
-        referencedColumnNames: ['id'],
-        referencedTableName: 'books',
         onDelete: 'SET NULL',
         onUpdate: 'CASCADE',
       }),
