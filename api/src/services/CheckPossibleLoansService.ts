@@ -22,6 +22,7 @@ class CheckPossibleLoansService {
         where: {
           owner_id: Not(user_id),
           isbn: wish.book_isbn,
+          borrowed: false,
         },
       });
       possibleBooks.forEach(book => {
