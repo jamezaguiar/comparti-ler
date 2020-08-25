@@ -6,6 +6,7 @@ import {
   PrimaryGeneratedColumn,
   ManyToOne,
   JoinColumn,
+  OneToOne,
 } from 'typeorm';
 
 import Book from './Book';
@@ -33,6 +34,11 @@ class Loan {
   @Column()
   book_isbn: string;
 
+  @Column()
+  book_id: string;
+
+  @OneToOne(type => Book)
+  @JoinColumn({ name: 'book_id' })
   book: Book;
 
   @Column()

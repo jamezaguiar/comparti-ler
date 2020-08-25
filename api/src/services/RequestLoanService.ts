@@ -55,6 +55,7 @@ class RequestLoanService {
     const loan = loansRepository.create({
       book_isbn,
       book_owner_id,
+      book_id: userHasTheBook.id,
       requester_id,
       status: 'requested',
     });
