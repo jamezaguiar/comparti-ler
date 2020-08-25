@@ -12,7 +12,7 @@ class ListRequestedLoansService {
 
     const loans = await loansRepository.find({
       where: { status: 'requested', book_owner_id: user_id },
-      relations: ['book'],
+      relations: ['book', 'book_owner', 'requester'],
     });
 
     return loans;
