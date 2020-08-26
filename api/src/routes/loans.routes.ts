@@ -7,6 +7,7 @@ import ensureAuthenticated from '../middlewares/ensureAuthenticated';
 import ListRequestedLoansService from '../services/ListRequestedLoansService';
 import AcceptRequestedLoanService from '../services/AcceptRequestedLoanService';
 import RejectRequestedLoanService from '../services/RejectRequestedLoanService';
+import ListLoanByIdService from '../services/ListLoanByIdService';
 
 const loansRouter = Router();
 
@@ -34,6 +35,18 @@ loansRouter.get('/possibleLoans/:user_id', async (request, response) => {
   const possibleLoans = await checkPossibleLoans.execute(user_id);
 
   return response.json(possibleLoans);
+});
+
+loansRouter.get('/list/:id', async (request, response) => {
+  const { id } = request.params;
+
+  const listLoanById = new ListLoanByIdService();
+
+  const loan = await listLoanById.execute({ loan_id: id });
+  delete loan.requester.password;
+  delete loan.book_owner.password;
+
+  return response.json(loan);
 });
 
 loansRouter.post('/request', async (request, response) => {
