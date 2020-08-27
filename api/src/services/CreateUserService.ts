@@ -10,7 +10,7 @@ interface RequestDTO {
   name: string;
   email: string;
   password: string;
-  whatsapp?: string;
+  whatsapp: string;
 }
 
 class CreateUserService {
@@ -31,12 +31,13 @@ class CreateUserService {
     }
 
     const hashedPassword = await hash(password, 8);
+    const formattedWhatsapp = `+55${whatsapp}`;
 
     const user = usersRepository.create({
       name,
       email,
       password: hashedPassword,
-      whatsapp,
+      whatsapp: formattedWhatsapp,
     });
 
     await usersRepository.save(user);
