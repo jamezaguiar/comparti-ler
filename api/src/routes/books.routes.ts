@@ -3,8 +3,10 @@ import { Router } from 'express';
 import ensureAuthenticated from '../middlewares/ensureAuthenticated';
 
 import RegisterBookService from '../services/RegisterBookService';
-import ListBooksService from '../services/ListBooksService';
+
 import ListUserBooksService from '../services/ListUserBooksService';
+import ListBooksService from '../services/ListBooksService';
+import ListAvailableBooksService from '../services/ListAvailableBooksService';
 
 const booksRouter = Router();
 
@@ -37,7 +39,20 @@ booksRouter.get('/listAll', async (request, response) => {
   const listBooks = new ListBooksService();
 
   const books = await listBooks.execute();
-  books.map(book => delete book.owner.password);
+  books.forEach(book => {
+    delete book.owner.password;
+  });
+
+  return response.json(books);
+});
+
+booksRouter.get('/listAvailable', async (request, response) => {
+  const listAvailableBooks = new ListAvailableBooksService();
+
+  const books = await listAvailableBooks.execute();
+  books.forEach(book => {
+    delete book.owner.password;
+  });
 
   return response.json(books);
 });
