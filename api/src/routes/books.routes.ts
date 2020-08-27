@@ -46,10 +46,12 @@ booksRouter.get('/listAll', async (request, response) => {
   return response.json(books);
 });
 
-booksRouter.get('/listAvailable', async (request, response) => {
+booksRouter.get('/listAvailable/:user_id', async (request, response) => {
+  const { user_id } = request.params;
+
   const listAvailableBooks = new ListAvailableBooksService();
 
-  const books = await listAvailableBooks.execute();
+  const books = await listAvailableBooks.execute({ user_id });
   books.forEach(book => {
     delete book.owner.password;
   });
