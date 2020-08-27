@@ -1,10 +1,11 @@
-import { getRepository, getCustomRepository } from 'typeorm';
+import { getCustomRepository } from 'typeorm';
 
 import AppError from '../error/AppError';
 
 import Loan from '../models/Loan';
 
 import BooksRepository from '../repositories/BooksRepository';
+import LoansRepository from '../repositories/LoansRepository';
 
 interface BookData {
   isbn: string;
@@ -32,7 +33,7 @@ class RequestLoanService {
     book_isbn,
   }: RequestDTO): Promise<ResponseDTO> {
     const booksRepository = getCustomRepository(BooksRepository);
-    const loansRepository = getRepository(Loan);
+    const loansRepository = getCustomRepository(LoansRepository);
 
     const isBorrowed = await booksRepository.checkIfBookIsBorrowed(
       book_owner_id,
@@ -52,16 +53,6 @@ class RequestLoanService {
       throw new AppError(`User ${book_owner_id} doesn't have this book.`);
     }
 
-    const loan = loansRepository.create({
-      book_isbn,
-      book_owner_id,
-      book_id: userHasTheBook.id,
-      requester_id,
-      status: 'requested',
-    });
-
-    await loansRepository.save(loan);
-
     const bookData = await booksRepository.getBookData(book_isbn);
 
     const author = `${bookData.contribuicao[0].nome} ${bookData.contribuicao[0].sobrenome}`;
@@ -76,6 +67,26 @@ class RequestLoanService {
       synopsis: bookData.sinopse,
       cover_url,
     };
+
+    const loanRequestAlreadyExists = await loansRepository.checkIfALoanHasAlreadyBeenRequested(
+      requester_id,
+      book_owner_id,
+      book_isbn,
+    );
+
+    if (loanRequestAlreadyExists) {
+      return { loan: loanRequestAlreadyExists, book };
+    }
+
+    const loan = loansRepository.create({
+      book_isbn,
+      book_owner_id,
+      book_id: userHasTheBook.id,
+      requester_id,
+      status: 'requested',
+    });
+
+    await loansRepository.save(loan);
 
     return { loan, book };
   }
