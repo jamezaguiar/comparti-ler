@@ -1,3 +1,5 @@
 import { createConnection } from 'typeorm';
 
-createConnection();
+createConnection({
+  url: process.env.DATABASE_URL,
+});
