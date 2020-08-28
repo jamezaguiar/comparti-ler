@@ -20,6 +20,7 @@
   ],
   "rules": {
     "camelcase": "off",
+    "no-param-reassign": "off",
     "class-methods-use-this": "off",
     "prettier/prettier": "error",
     "import/extensions": [
