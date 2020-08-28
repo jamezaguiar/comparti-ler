@@ -8,6 +8,7 @@ import ListRequestedLoansService from '../services/ListRequestedLoansService';
 import AcceptRequestedLoanService from '../services/AcceptRequestedLoanService';
 import RejectRequestedLoanService from '../services/RejectRequestedLoanService';
 import ListLoanByIdService from '../services/ListLoanByIdService';
+import ListUserLoansService from '../services/ListUserLoansService';
 
 const loansRouter = Router();
 
@@ -47,6 +48,20 @@ loansRouter.get('/list/:id', async (request, response) => {
   delete loan.book_owner.password;
 
   return response.json(loan);
+});
+
+loansRouter.get('/listUserLoans/:user_id', async (request, response) => {
+  const { user_id } = request.params;
+
+  const listUserLoans = new ListUserLoansService();
+
+  const loans = await listUserLoans.execute({ user_id });
+  loans.forEach(loan => {
+    delete loan.requester.password;
+    delete loan.book_owner.password;
+  });
+
+  return response.json(loans);
 });
 
 loansRouter.post('/request', async (request, response) => {
