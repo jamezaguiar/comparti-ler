@@ -15,6 +15,7 @@ import ListUserLoansRequestsService from '../services/ListUserLoansRequestsServi
 
 import DeliverBookService from '../services/DeliverBookService';
 import ReceiveBookService from '../services/ReceiveBookService';
+import ListUserAllLoansService from '../services/ListUserAllLoansService';
 
 const loansRouter = Router();
 
@@ -86,6 +87,16 @@ loansRouter.get(
     return response.json(loans);
   },
 );
+
+loansRouter.get('/listUserAllLoans/:user_id', async (request, response) => {
+  const { user_id } = request.params;
+
+  const listUserAllLoans = new ListUserAllLoansService();
+
+  const loans = await listUserAllLoans.execute({ user_id });
+
+  return response.json(loans);
+});
 
 loansRouter.post('/request', async (request, response) => {
   const { book_isbn, book_owner_id, requester_id } = request.body;
