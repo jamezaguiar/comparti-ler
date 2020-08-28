@@ -9,6 +9,7 @@ import AcceptRequestedLoanService from '../services/AcceptRequestedLoanService';
 import RejectRequestedLoanService from '../services/RejectRequestedLoanService';
 import ListLoanByIdService from '../services/ListLoanByIdService';
 import ListUserLoansService from '../services/ListUserLoansService';
+import ListUserLoansRequestsService from '../services/ListUserLoansRequestsService';
 
 const loansRouter = Router();
 
@@ -63,6 +64,23 @@ loansRouter.get('/listUserLoans/:user_id', async (request, response) => {
 
   return response.json(loans);
 });
+
+loansRouter.get(
+  '/listUserRequestedLoans/:user_id',
+  async (request, response) => {
+    const { user_id } = request.params;
+
+    const listUserLoansRequests = new ListUserLoansRequestsService();
+
+    const loans = await listUserLoansRequests.execute({ user_id });
+    loans.forEach(loan => {
+      delete loan.requester.password;
+      delete loan.book_owner.password;
+    });
+
+    return response.json(loans);
+  },
+);
 
 loansRouter.post('/request', async (request, response) => {
   const { book_isbn, book_owner_id, requester_id } = request.body;
