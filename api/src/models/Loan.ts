@@ -42,7 +42,7 @@ class Loan {
   book: Book;
 
   @Column()
-  status: 'accepted' | 'rejected' | 'returned' | 'requested';
+  status: 'requested' | 'accepted' | 'rejected' | 'delivered' | 'returned';
 
   @Column()
   received_at: Date;

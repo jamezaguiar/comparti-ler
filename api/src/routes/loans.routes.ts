@@ -4,12 +4,17 @@ import CheckPossibleLoansService from '../services/CheckPossibleLoansService';
 import RequestLoanService from '../services/RequestLoanService';
 
 import ensureAuthenticated from '../middlewares/ensureAuthenticated';
+
 import ListRequestedLoansService from '../services/ListRequestedLoansService';
 import AcceptRequestedLoanService from '../services/AcceptRequestedLoanService';
 import RejectRequestedLoanService from '../services/RejectRequestedLoanService';
+
 import ListLoanByIdService from '../services/ListLoanByIdService';
 import ListUserLoansService from '../services/ListUserLoansService';
 import ListUserLoansRequestsService from '../services/ListUserLoansRequestsService';
+
+import DeliverBookService from '../services/DeliverBookService';
+import ReceiveBookService from '../services/ReceiveBookService';
 
 const loansRouter = Router();
 
@@ -116,6 +121,25 @@ loansRouter.put('/rejectLoan/:loan_id', async (request, response) => {
   await rejectRequestedLoan.execute({ loan_id });
 
   return response.json({ message: 'Loan request rejected' });
+});
+
+loansRouter.put('/deliverBook/:loan_id', async (request, response) => {
+  const { loan_id } = request.params;
+
+  const deliverBook = new DeliverBookService();
+
+  const loan = await deliverBook.execute({ loan_id });
+
+  return response.json(loan);
+});
+loansRouter.put('/receiveBook/:loan_id', async (request, response) => {
+  const { loan_id } = request.params;
+
+  const receiveBook = new ReceiveBookService();
+
+  const loan = await receiveBook.execute({ loan_id });
+
+  return response.json(loan);
 });
 
 export default loansRouter;
