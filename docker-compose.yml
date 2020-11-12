@@ -1,0 +1,12 @@
+version: "3.1"
+
+services:
+  compartiler_db:
+    image: postgres
+    container_name: compartiler
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: docker
+      POSTGRES_DB: compartiler
+    ports:
+      - 5432:5432

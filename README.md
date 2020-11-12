@@ -61,6 +61,20 @@ $ git clone https://github.com/jamezaguiar/comparti-ler.git
 $ cd comparti-ler
 ```
 
+#### Iniciando servidor
+
+```sh
+$ cd comparti-ler
+
+# Criando a imagem Docker do banco de dados:
+# Dentro do projeto, já existe uma arquivo docker-compose.yml que possui o
+# PostgreSQL como banco de dados, basta ter o Docker instalado em sua máquina.
+$ docker-compose up -d # Iniciará em background e não irá bloquear o shell
+
+# Rodando as migrations para o banco de dados e iniciando o projeto
+$ yarn && yarn typeorm migration:run && yarn dev:server
+```
+
 ### :memo: Licença
 
 Este projeto é desenvolvido sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para saber mais detalhes.
