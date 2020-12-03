@@ -1,10 +1,9 @@
 import { getCustomRepository } from 'typeorm';
 
-import WishesRepository from '../repositories/WishesRepository';
-import Wish from '../models/Wish';
-import BooksRepository from '../repositories/BooksRepository';
+import BooksRepository from '@modules/books/infra/typeorm/repositories/BooksRepository';
 
-import SendPossibleLoansService from './SendPossibleLoansService';
+import Wish from '../infra/typeorm/entities/Wish';
+import WishesRepository from '../infra/typeorm/repositories/WishesRepository';
 
 interface BookData {
   isbn: string;
@@ -47,10 +46,6 @@ class RegisterWishService {
     });
 
     await wishesRepository.save(wish);
-
-    const sendPossibleLoans = new SendPossibleLoansService();
-
-    sendPossibleLoans.execute({});
 
     const bookData = await booksRepository.getBookData(isbn);
 

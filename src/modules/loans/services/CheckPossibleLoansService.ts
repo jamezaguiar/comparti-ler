@@ -1,10 +1,10 @@
 /* eslint-disable no-restricted-syntax */
 import { getCustomRepository, Not } from 'typeorm';
 
-import Book from '../models/Book';
+import Book from '@modules/books/infra/typeorm/entities/Book';
 
-import BooksRepository from '../repositories/BooksRepository';
-import WishesRepository from '../repositories/WishesRepository';
+import BooksRepository from '@modules/books/infra/typeorm/repositories/BooksRepository';
+import WishesRepository from '@modules/wishes/infra/typeorm/repositories/WishesRepository';
 
 class CheckPossibleLoansService {
   public async execute(user_id: string): Promise<Book[]> {

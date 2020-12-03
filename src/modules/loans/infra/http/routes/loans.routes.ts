@@ -1,21 +1,21 @@
 import { Router } from 'express';
 
-import CheckPossibleLoansService from '../services/CheckPossibleLoansService';
-import RequestLoanService from '../services/RequestLoanService';
+import CheckPossibleLoansService from '@modules/loans/services/CheckPossibleLoansService';
+import RequestLoanService from '@modules/loans/services/RequestLoanService';
 
-import ensureAuthenticated from '../middlewares/ensureAuthenticated';
+import ListRequestedLoansService from '@modules/loans/services/ListRequestedLoansService';
+import AcceptRequestedLoanService from '@modules/loans/services/AcceptRequestedLoanService';
+import RejectRequestedLoanService from '@modules/loans/services/RejectRequestedLoanService';
 
-import ListRequestedLoansService from '../services/ListRequestedLoansService';
-import AcceptRequestedLoanService from '../services/AcceptRequestedLoanService';
-import RejectRequestedLoanService from '../services/RejectRequestedLoanService';
+import ListLoanByIdService from '@modules/loans/services/ListLoanByIdService';
+import ListUserLoansService from '@modules/loans/services/ListUserLoansService';
+import ListUserLoansRequestsService from '@modules/loans/services/ListUserLoansRequestsService';
 
-import ListLoanByIdService from '../services/ListLoanByIdService';
-import ListUserLoansService from '../services/ListUserLoansService';
-import ListUserLoansRequestsService from '../services/ListUserLoansRequestsService';
+import DeliverBookService from '@modules/loans/services/DeliverBookService';
+import ReceiveBookService from '@modules/loans/services/ReceiveBookService';
+import ListUserAllLoansService from '@modules/loans/services/ListUserAllLoansService';
 
-import DeliverBookService from '../services/DeliverBookService';
-import ReceiveBookService from '../services/ReceiveBookService';
-import ListUserAllLoansService from '../services/ListUserAllLoansService';
+import ensureAuthenticated from '@shared/infra/http/middlewares/ensureAuthenticated';
 
 const loansRouter = Router();
 

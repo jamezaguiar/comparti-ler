@@ -1,10 +1,10 @@
 import { Router } from 'express';
 
-import CreateUserService from '../services/CreateUserService';
-import ListUsersService from '../services/ListUsersService';
-import ListUserByIdService from '../services/ListUserByIdService';
+import CreateUserService from '@modules/users/services/CreateUserService';
+import ListUsersService from '@modules/users/services/ListUsersService';
+import ListUserByIdService from '@modules/users/services/ListUserByIdService';
 
-import ensureAuthenticated from '../middlewares/ensureAuthenticated';
+import ensureAuthenticated from '@shared/infra/http/middlewares/ensureAuthenticated';
 
 const usersRouter = Router();
 

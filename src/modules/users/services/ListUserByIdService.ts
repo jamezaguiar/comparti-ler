@@ -1,9 +1,9 @@
 import { getCustomRepository } from 'typeorm';
 
-import User from '../models/User';
-import UsersRepository from '../repositories/UsersRepository';
+import AppError from '@shared/errors/AppError';
 
-import AppError from '../error/AppError';
+import User from '../infra/typeorm/entities/User';
+import UsersRepository from '../infra/typeorm/repositories/UsersRepository';
 
 class ListUserByIdService {
   public async execute(id: string): Promise<User | null> {

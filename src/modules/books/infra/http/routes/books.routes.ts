@@ -1,12 +1,12 @@
 import { Router } from 'express';
 
-import ensureAuthenticated from '../middlewares/ensureAuthenticated';
+import ensureAuthenticated from '@shared/infra/http/middlewares/ensureAuthenticated';
 
-import RegisterBookService from '../services/RegisterBookService';
+import RegisterBookService from '@modules/books/services/RegisterBookService';
 
-import ListUserBooksService from '../services/ListUserBooksService';
-import ListBooksService from '../services/ListBooksService';
-import ListAvailableBooksService from '../services/ListAvailableBooksService';
+import ListUserBooksService from '@modules/books/services/ListUserBooksService';
+import ListBooksService from '@modules/books/services/ListBooksService';
+import ListAvailableBooksService from '@modules/books/services/ListAvailableBooksService';
 
 const booksRouter = Router();
 

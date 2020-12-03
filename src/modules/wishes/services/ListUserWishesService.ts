@@ -1,10 +1,10 @@
 /* eslint-disable no-restricted-syntax */
 import { getCustomRepository } from 'typeorm';
 
-import Wish from '../models/Wish';
+import BooksRepository from '@modules/books/infra/typeorm/repositories/BooksRepository';
 
-import WishesRepository from '../repositories/WishesRepository';
-import BooksRepository from '../repositories/BooksRepository';
+import Wish from '../infra/typeorm/entities/Wish';
+import WishesRepository from '../infra/typeorm/repositories/WishesRepository';
 
 interface BookData {
   isbn: string;

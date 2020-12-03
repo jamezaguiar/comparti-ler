@@ -1,10 +1,9 @@
 import { getCustomRepository } from 'typeorm';
 
-import Book from '../models/Book';
-import BooksRepository from '../repositories/BooksRepository';
+import AppError from '@shared/errors/AppError';
 
-import AppError from '../error/AppError';
-import SendPossibleLoansService from './SendPossibleLoansService';
+import Book from '../infra/typeorm/entities/Book';
+import BooksRepository from '../infra/typeorm/repositories/BooksRepository';
 
 interface RequestDTO {
   isbn: string;
@@ -52,10 +51,6 @@ class RegisterBookService {
     });
 
     await booksRepository.save(book);
-
-    const sendPossibleLoans = new SendPossibleLoansService();
-
-    sendPossibleLoans.execute({});
 
     return book;
   }

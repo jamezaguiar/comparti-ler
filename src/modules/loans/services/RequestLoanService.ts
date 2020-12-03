@@ -1,11 +1,11 @@
 import { getCustomRepository } from 'typeorm';
 
-import AppError from '../error/AppError';
+import AppError from '@shared/errors/AppError';
 
-import Loan from '../models/Loan';
+import BooksRepository from '@modules/books/infra/typeorm/repositories/BooksRepository';
 
-import BooksRepository from '../repositories/BooksRepository';
-import LoansRepository from '../repositories/LoansRepository';
+import Loan from '../infra/typeorm/entities/Loan';
+import LoansRepository from '../infra/typeorm/repositories/LoansRepository';
 
 interface BookData {
   isbn: string;

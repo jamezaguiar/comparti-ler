@@ -1,8 +1,8 @@
 import { getRepository } from 'typeorm';
 
-import AppError from '../error/AppError';
+import AppError from '@shared/errors/AppError';
 
-import Loan from '../models/Loan';
+import Loan from '../infra/typeorm/entities/Loan';
 
 interface RequestDTO {
   loan_id: string;

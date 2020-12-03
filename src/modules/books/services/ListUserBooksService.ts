@@ -1,7 +1,7 @@
 import { getCustomRepository } from 'typeorm';
 
-import Book from '../models/Book';
-import BooksRepository from '../repositories/BooksRepository';
+import Book from '../infra/typeorm/entities/Book';
+import BooksRepository from '../infra/typeorm/repositories/BooksRepository';
 
 class ListUserBooksService {
   public async execute(owner_id: string): Promise<Book[]> {

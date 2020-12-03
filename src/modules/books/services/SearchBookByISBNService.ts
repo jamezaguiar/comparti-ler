@@ -1,4 +1,4 @@
-import { booksAPI } from '../helpers/api';
+import { booksAPI } from '@shared/helpers/api';
 
 interface BookStatusDTO {
   success: boolean;

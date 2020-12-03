@@ -1,7 +1,8 @@
 import { EntityRepository, Repository, getCustomRepository } from 'typeorm';
 
-import Wish from '../models/Wish';
-import BooksRepository from './BooksRepository';
+import BooksRepository from '@modules/books/infra/typeorm/repositories/BooksRepository';
+
+import Wish from '../entities/Wish';
 
 interface BookData {
   isbn: string;

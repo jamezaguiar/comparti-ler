@@ -9,8 +9,8 @@ import {
   OneToOne,
 } from 'typeorm';
 
-import Book from './Book';
-import User from './User';
+import Book from '@modules/books/infra/typeorm/entities/Book';
+import User from '@modules/users/infra/typeorm/entities/User';
 
 @Entity('loans')
 class Loan {

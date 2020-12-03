@@ -1,9 +1,9 @@
 import { Router } from 'express';
 
-import ensureAuthenticated from '../middlewares/ensureAuthenticated';
+import ensureAuthenticated from '@shared/infra/http/middlewares/ensureAuthenticated';
 
-import SearchBookByISBNService from '../services/SearchBookByISBNService';
-import SearchBooksByTitleService from '../services/SearchBooksByTitleService';
+import SearchBookByISBNService from '@modules/books/services/SearchBookByISBNService';
+import SearchBooksByTitleService from '@modules/books/services/SearchBooksByTitleService';
 
 const externalAPIRouter = Router();
 

@@ -1,10 +1,10 @@
 import { getCustomRepository } from 'typeorm';
 import { hash } from 'bcryptjs';
 
-import User from '../models/User';
-import UsersRepository from '../repositories/UsersRepository';
+import AppError from '@shared/errors/AppError';
 
-import AppError from '../error/AppError';
+import User from '../infra/typeorm/entities/User';
+import UsersRepository from '../infra/typeorm/repositories/UsersRepository';
 
 interface RequestDTO {
   name: string;

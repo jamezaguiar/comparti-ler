@@ -7,8 +7,8 @@ import {
   OneToMany,
 } from 'typeorm';
 
-import Book from './Book';
-import Wish from './Wish';
+import Book from '@modules/books/infra/typeorm/entities/Book';
+import Wish from '@modules/wishes/infra/typeorm/entities/Wish';
 
 @Entity('users')
 class User {

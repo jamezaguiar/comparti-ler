@@ -1,8 +1,8 @@
 import { EntityRepository, Repository } from 'typeorm';
 
-import { booksAPI } from '../helpers/api';
+import { booksAPI } from '@shared/helpers/api';
 
-import Book from '../models/Book';
+import Book from '@modules/books/infra/typeorm/entities/Book';
 
 interface BookStatusDTO {
   success: boolean;

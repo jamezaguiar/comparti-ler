@@ -1,8 +1,10 @@
 import { Router } from 'express';
-import ensureAuthenticated from '../middlewares/ensureAuthenticated';
-import RegisterWishService from '../services/RegisterWishService';
-import ListWishesService from '../services/ListWishesService';
-import ListUserWishesService from '../services/ListUserWishesService';
+
+import ensureAuthenticated from '@shared/infra/http/middlewares/ensureAuthenticated';
+
+import RegisterWishService from '@modules/wishes/services/RegisterWishService';
+import ListWishesService from '@modules/wishes/services/ListWishesService';
+import ListUserWishesService from '@modules/wishes/services/ListUserWishesService';
 
 const wishesRouter = Router();
 

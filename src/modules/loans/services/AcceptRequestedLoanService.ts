@@ -1,10 +1,10 @@
 import { getRepository, getCustomRepository } from 'typeorm';
 
-import AppError from '../error/AppError';
+import AppError from '@shared/errors/AppError';
 
-import Loan from '../models/Loan';
+import BooksRepository from '@modules/books/infra/typeorm/repositories/BooksRepository';
 
-import BooksRepository from '../repositories/BooksRepository';
+import Loan from '../infra/typeorm/entities/Loan';
 
 interface RequestDTO {
   loan_id: string;

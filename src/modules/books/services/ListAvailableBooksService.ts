@@ -1,7 +1,7 @@
 import { getCustomRepository, Not } from 'typeorm';
 
-import Book from '../models/Book';
-import BooksRepository from '../repositories/BooksRepository';
+import Book from '../infra/typeorm/entities/Book';
+import BooksRepository from '../infra/typeorm/repositories/BooksRepository';
 
 interface RequestDTO {
   user_id: string;

@@ -1,7 +1,7 @@
 import { getCustomRepository } from 'typeorm';
 
-import Loan from '../models/Loan';
-import LoansRepository from '../repositories/LoansRepository';
+import Loan from '../infra/typeorm/entities/Loan';
+import LoansRepository from '../infra/typeorm/repositories/LoansRepository';
 
 interface RequestDTO {
   user_id: string;
