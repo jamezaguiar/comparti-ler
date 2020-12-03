@@ -64,7 +64,7 @@ $ cd api-compartiler
 #### Iniciando servidor
 
 ```sh
-$ cd comparti-ler
+$ cd api-compartiler
 
 # Criando a imagem Docker do banco de dados:
 # Dentro do projeto, existe um arquivo docker-compose.yml que possui o
