@@ -38,7 +38,7 @@ O projeto foi feito com as seguintes tecnologias:
 
 ```bash
 # Clone o seu fork
-$ git clone url-do-seu-fork && cd comparti-ler
+$ git clone url-do-seu-fork && cd api-compartiler
 
 # Crie uma branch com sua feature ou correção de bugs
 $ git checkout -b minha-branch
