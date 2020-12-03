@@ -57,8 +57,8 @@ Depois que o merge da sua pull request for feito, você pode deletar a sua branc
 #### Clonando o projeto
 
 ```sh
-$ git clone https://github.com/jamezaguiar/comparti-ler.git
-$ cd comparti-ler
+$ git clone https://github.com/jamezaguiar/api-compartiler.git
+$ cd api-compartiler
 ```
 
 #### Iniciando servidor
@@ -67,7 +67,7 @@ $ cd comparti-ler
 $ cd comparti-ler
 
 # Criando a imagem Docker do banco de dados:
-# Dentro do projeto, já existe uma arquivo docker-compose.yml que possui o
+# Dentro do projeto, existe um arquivo docker-compose.yml que possui o
 # PostgreSQL como banco de dados, basta ter o Docker instalado em sua máquina.
 $ docker-compose up -d # Iniciará em background e não irá bloquear o shell
 
